@@ -1,9 +1,10 @@
 # StockCharts
-stock timesharing and kline charts for Android
+stock TimeSharing and Kline charts for Android
 
 ## picture
-![timesharing](/shot/ts.png)
-![kline](/shot/kline.gif)
+![timeSharing](/shot/ts.mp4)
+
+![kline](/shot/kline.mp4)
 
 ## License
   Apache License 2.0
