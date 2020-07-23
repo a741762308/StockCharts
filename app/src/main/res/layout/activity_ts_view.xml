@@ -4,12 +4,194 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.TSViewActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cross_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="07/14 11:56" />
+
+        <TextView
+            android:id="@+id/price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="价 格"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_tv" />
+
+        <TextView
+            android:id="@+id/price_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/price_label"
+            app:layout_constraintEnd_toStartOf="@+id/change_label"
+            app:layout_constraintStart_toEndOf="@+id/price_label" />
+
+        <TextView
+            android:id="@+id/change_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="涨跌额"
+            app:layout_constraintEnd_toStartOf="@+id/change_tv"
+            app:layout_constraintStart_toEndOf="@+id/price_tv"
+            app:layout_constraintTop_toTopOf="@+id/price_label" />
+
+        <TextView
+            android:id="@+id/change_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/price_label"
+            app:layout_constraintEnd_toStartOf="@+id/amount_label"
+            app:layout_constraintStart_toEndOf="@+id/change_label" />
+
+        <TextView
+            android:id="@+id/amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成交额"
+            app:layout_constraintEnd_toStartOf="@+id/amount_tv"
+            app:layout_constraintStart_toEndOf="@+id/change_tv"
+            app:layout_constraintTop_toTopOf="@+id/price_label" />
+
+        <TextView
+            android:id="@+id/amount_tv"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="1111.00万"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/price_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/avg_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="均 价"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_label" />
+
+        <TextView
+            android:id="@+id/avg_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/avg_label"
+            app:layout_constraintEnd_toStartOf="@+id/roc_label"
+            app:layout_constraintStart_toEndOf="@+id/avg_label" />
+
+        <TextView
+            android:id="@+id/roc_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="涨跌幅"
+            app:layout_constraintEnd_toStartOf="@+id/roc_tv"
+            app:layout_constraintStart_toEndOf="@+id/avg_tv"
+            app:layout_constraintTop_toTopOf="@+id/avg_label" />
+
+        <TextView
+            android:id="@+id/roc_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="11.00%"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/avg_label"
+            app:layout_constraintEnd_toStartOf="@+id/volume_label"
+            app:layout_constraintStart_toEndOf="@+id/roc_label" />
+
+        <TextView
+            android:id="@+id/volume_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成交量"
+            app:layout_constraintEnd_toStartOf="@+id/volume_tv"
+            app:layout_constraintStart_toEndOf="@+id/roc_tv"
+            app:layout_constraintTop_toTopOf="@+id/avg_label" />
+
+        <TextView
+            android:id="@+id/volume_tv"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="111.00万股"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/avg_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.charles.stocks.charts.view.ts.TSView
         android:id="@+id/ts_view"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cross_view" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ts_view">
+
+        <RadioButton
+            android:id="@+id/float_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="悬浮窗" />
+
+        <RadioButton
+            android:id="@+id/top_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:checked="true"
+            android:text="顶部浮层" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

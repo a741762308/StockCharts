@@ -265,6 +265,11 @@ class TSChart(
             mPaint.color = ChartsUtil.getPriceLineShadowColor()
             canvas.drawPath(priceShadowPath, mPaint)
         }
+        if (avgPath != null) {
+            mPaint.style = Paint.Style.STROKE
+            mPaint.color = ChartsUtil.getAvgLineColor()
+            canvas.drawPath(avgPath, mPaint)
+        }
 
         canvas.restore()
     }

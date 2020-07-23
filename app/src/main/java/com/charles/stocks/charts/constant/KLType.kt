@@ -20,71 +20,36 @@ import com.charles.stocks.charts.constant.KLType.Companion.WEEK
     AnnotationTarget.FIELD,
     AnnotationTarget.LOCAL_VARIABLE,
     AnnotationTarget.PROPERTY,
-    AnnotationTarget.FUNCTION
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.VALUE_PARAMETER
 )
 @Retention(AnnotationRetention.SOURCE)
 annotation class KLType {
     companion object {
         const val NONE = 0
 
-        /**
-         * 01分钟数据
-         */
         const val MIN1 = 1
 
-        /**
-         * 05分钟数据
-         */
         const val MIN5 = 2
 
-        /**
-         * 10分钟数据
-         */
         const val MIN10 = 3
 
-        /**
-         * 15分钟数据
-         */
         const val MIN15 = 4
 
-        /**
-         * 30分钟数据
-         */
         const val MIN30 = 5
 
-        /**
-         * 60分钟数据
-         */
         const val MIN60 = 6
 
-        /**
-         * 日K线数据
-         */
         const val DAY = 7
 
-        /**
-         * 周K线数据
-         */
         const val WEEK = 8
 
-        /**
-         * 月K线数据
-         */
         const val MONTH = 9
 
-        /**
-         * 季K线数据
-         */
         const val MNT3 = 10
 
-        /**
-         * 半年K线数据
-         */
         const val MNT6 = 11
 
-        /**
-         * 年K线数据
-         */
         const val MNT12 = 12
     }
 }

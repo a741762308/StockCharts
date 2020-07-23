@@ -6,9 +6,10 @@ import android.graphics.Paint
 import android.graphics.Rect
 import androidx.annotation.ColorInt
 import androidx.annotation.IntDef
+import com.charles.stocks.charts.constant.KLType
 import com.charles.stocks.charts.model.Stock
 import com.charles.stocks.charts.view.kl.model.KLNode
-import java.math.BigDecimal
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.ceil
 
@@ -57,6 +58,9 @@ object ChartsUtil {
     private val sPriceLineColor = Color.parseColor("#FF47BBFF")
     private val sAvgLineColor = Color.parseColor("#FFA9880A")
     private val sPriceLineShadowColor = Color.parseColor("#400484CE")
+    private val sCrossLineColor = Color.parseColor("#4D0091FF")
+    private val sCrossCircleBgColor = Color.parseColor("#FFF3F3F3")
+    private val sCrossBgColor = Color.parseColor("#FFFAFAFA")
 
 
     fun getTextWidth(text: String, paint: Paint): Int {
@@ -73,7 +77,7 @@ object ChartsUtil {
         text: String,
         x: Int,
         y: Int,
-        @TextAlign align: Int
+        @TextAlign align: Int = TEXT_ALIGN_TOP or TEXT_ALIGN_LEFT
     ) {
         val fm = paint.fontMetrics
         val left = when {
@@ -81,7 +85,7 @@ object ChartsUtil {
                 x - getTextWidth(text, paint) / 2
             }
             (align and TEXT_ALIGN_RIGHT) == TEXT_ALIGN_RIGHT -> {
-                x - getTextWidth(text, paint) / 2
+                x - getTextWidth(text, paint)
             }
             else -> {
                 x
@@ -159,8 +163,57 @@ object ChartsUtil {
         return res
     }
 
-    fun rebuildNumber(number: Double, decimalPlaces: Int): String {
-        return BigDecimal(number).setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP).toPlainString()
+    fun formatNumWithUnitKeep2Decimal(num: Double, sign: Boolean = false): String {
+        var value = abs(num)
+        var res = when {
+            value / 1E12 > 1 -> {
+                String.format("%s万亿", String.format("%1$.2f", value / 1E12))
+            }
+            value / 1E8 > 1 -> {
+                String.format("%s亿", String.format("%1$.2f", value / 1E8))
+            }
+            value / 1E4 > 1 -> {
+                String.format("%s万", String.format("%1$.2f", value / 1E4))
+            }
+            else -> {
+                String.format("%1$.2f", value)
+            }
+        }
+        if (num < 0) {
+            res = "-$res"
+        }
+        if (sign && num > 0) {
+            res = "+$res"
+        }
+        return res
+    }
+
+    fun formatNumWithUnitKeep2DecimalNoZero(num: Double): String {
+        return if (doubleEqualsZero(num)) {
+            "--"
+        } else {
+            formatNumWithUnitKeep2Decimal(num)
+        }
+    }
+
+    fun rebuildNumber(number: Double, decimalPlaces: Int = 3): String {
+        return String.format(Locale.ENGLISH, "%." + decimalPlaces + "f", number);
+    }
+
+    fun reBuildNumWithoutZero(value: Double, decimalPlaces: Int = 3): String {
+        return if (doubleEqualsZero(value)) {
+            "--"
+        } else {
+            String.format(Locale.ENGLISH, "%." + decimalPlaces + "f", value)
+        }
+    }
+
+    fun reBuildNumWidthSign(value: Double, decimalPlaces: Int = 3): String {
+        var res = String.format(Locale.ENGLISH, "%." + decimalPlaces + "f", value)
+        if (value.compareTo(0.0) > 0) {
+            res = "+$res"
+        }
+        return res
     }
 
     @ColorInt
@@ -221,6 +274,21 @@ object ChartsUtil {
     @ColorInt
     fun getDividerColor(): Int {
         return sDividerColor
+    }
+
+    @ColorInt
+    fun getCrossLineColor(): Int {
+        return sCrossLineColor
+    }
+
+    @ColorInt
+    fun getCrossCircleBgColor(): Int {
+        return sCrossCircleBgColor
+    }
+
+    @ColorInt
+    fun getCrossBgColor(): Int {
+        return sCrossBgColor
     }
 
     fun buildTimeNodes(stock: Stock): IntArray {
@@ -290,4 +358,60 @@ object ChartsUtil {
         val timeHHmm = time % 10000
         return String.format("%d:%02d", timeHHmm / 100, timeHHmm % 100)
     }
+
+    fun formatDate(@KLType klType: Int, time: Long): String {
+        return if (klType >= KLType.DAY) {
+            formatQuoteTimeToYYYYMMDD(time)
+        } else {
+            formatQuoteTimeToYYYYMMDDHHmm(time)
+        }
+    }
+
+    fun formatQuoteTimeToYYYYMMDD(time: Long): String {
+        val sb = StringBuilder(time.toString())
+        if (sb.length != 17) return ""
+
+        sb.insert(6, "-").insert(4, "-")
+
+        return sb.substring(0, 10)
+    }
+
+
+    fun formatQuoteTimeToYYYYMMDDHHmm(time: Long): String {
+        val sb = StringBuilder(time.toString())
+        if (sb.length != 17) return ""
+
+        sb.insert(10, ":").insert(8, " ").insert(6, "-").insert(4, "-")
+
+        return sb.substring(0, 16)
+    }
+
+    fun formatQuoteTimeWeekName(time: Long): String {
+        val sb: java.lang.StringBuilder = StringBuilder(time.toString())
+        if (sb.length != 17) {
+            return ""
+        }
+        val c = Calendar.getInstance()
+        c.set(sb.substring(0, 4).toInt(), sb.substring(4, 6).toInt() - 1, sb.substring(6, 8).toInt())
+        return when (c.get(Calendar.DAY_OF_WEEK)) {
+            Calendar.SUNDAY -> "周日"
+            Calendar.MONDAY -> "周一"
+            Calendar.TUESDAY -> "周二"
+            Calendar.WEDNESDAY -> "周三"
+            Calendar.THURSDAY -> "周四"
+            Calendar.FRIDAY -> "周五"
+            Calendar.SATURDAY -> "周六"
+            else -> ""
+        }
+    }
+
+    fun formatTSNodeTimeToMMDDHHmm(time: Long): String {
+        val sb = StringBuilder(time.toString())
+        if (sb.length != 12) return ""
+
+        sb.insert(10, ":").insert(8, " ").insert(6, "-").insert(4, "-")
+
+        return sb.substring(5, 16)
+    }
+
 }

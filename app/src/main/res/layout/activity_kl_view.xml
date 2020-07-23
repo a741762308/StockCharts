@@ -4,12 +4,392 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.KLViewActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cross_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2020/07/14 周二" />
+
+        <TextView
+            android:id="@+id/open_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="开    盘"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_tv" />
+
+        <TextView
+            android:id="@+id/open_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/open_label"
+            app:layout_constraintEnd_toStartOf="@+id/highest_label"
+            app:layout_constraintStart_toEndOf="@+id/open_label" />
+
+        <TextView
+            android:id="@+id/highest_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最    高"
+            app:layout_constraintEnd_toStartOf="@+id/highest_tv"
+            app:layout_constraintStart_toEndOf="@+id/open_tv"
+            app:layout_constraintTop_toTopOf="@+id/open_label" />
+
+        <TextView
+            android:id="@+id/highest_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/open_label"
+            app:layout_constraintEnd_toStartOf="@+id/change_label"
+            app:layout_constraintStart_toEndOf="@+id/highest_label" />
+
+        <TextView
+            android:id="@+id/change_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="涨跌额"
+            app:layout_constraintEnd_toStartOf="@+id/change_tv"
+            app:layout_constraintStart_toEndOf="@+id/highest_tv"
+            app:layout_constraintTop_toTopOf="@+id/open_label" />
+
+        <TextView
+            android:id="@+id/change_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="1111.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/open_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/change_label" />
+
+        <TextView
+            android:id="@+id/close_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="收    盘"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/open_label" />
+
+        <TextView
+            android:id="@+id/close_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/close_label"
+            app:layout_constraintEnd_toStartOf="@+id/lowest_label"
+            app:layout_constraintStart_toEndOf="@+id/close_label" />
+
+        <TextView
+            android:id="@+id/lowest_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最    低"
+            app:layout_constraintEnd_toStartOf="@+id/lowest_tv"
+            app:layout_constraintStart_toEndOf="@+id/close_tv"
+            app:layout_constraintTop_toTopOf="@+id/close_label" />
+
+        <TextView
+            android:id="@+id/lowest_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="11.00"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/close_label"
+            app:layout_constraintEnd_toStartOf="@+id/roc_label"
+            app:layout_constraintStart_toEndOf="@+id/lowest_label" />
+
+        <TextView
+            android:id="@+id/roc_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="涨跌幅"
+            app:layout_constraintEnd_toStartOf="@+id/roc_tv"
+            app:layout_constraintStart_toEndOf="@+id/lowest_tv"
+            app:layout_constraintTop_toTopOf="@+id/close_label" />
+
+        <TextView
+            android:id="@+id/roc_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="111.00%"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/close_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/roc_label" />
+
+        <TextView
+            android:id="@+id/volume_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="成交量"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/close_label" />
+
+        <TextView
+            android:id="@+id/volume_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="1111.00万股"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/volume_label"
+            app:layout_constraintEnd_toStartOf="@+id/amount_label"
+            app:layout_constraintStart_toEndOf="@+id/volume_label" />
+
+        <TextView
+            android:id="@+id/amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成交额"
+            app:layout_constraintEnd_toStartOf="@+id/amount_tv"
+            app:layout_constraintStart_toEndOf="@+id/volume_tv"
+            app:layout_constraintTop_toTopOf="@+id/volume_label" />
+
+        <TextView
+            android:id="@+id/amount_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="111.00万"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/volume_label"
+            app:layout_constraintEnd_toStartOf="@+id/exchange_label"
+            app:layout_constraintStart_toEndOf="@+id/amount_label" />
+
+        <TextView
+            android:id="@+id/exchange_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="换手率"
+            app:layout_constraintEnd_toStartOf="@+id/exchange_tv"
+            app:layout_constraintStart_toEndOf="@+id/amount_tv"
+            app:layout_constraintTop_toTopOf="@+id/volume_label" />
+
+        <TextView
+            android:id="@+id/exchange_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:text="0.40%"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBaseline_toBaselineOf="@+id/volume_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/exchange_label" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.charles.stocks.charts.view.kl.KLView
         android:id="@+id/kl_view"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cross_view" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tech_type_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/kl_view"
+        tools:visibility="visible">
+
+        <CheckBox
+            android:id="@+id/ma_box"
+            style="@style/TechCheckStyle"
+            android:checked="true"
+            android:text="MA"
+            android:textColor="@color/selector_textcolor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/ema_box"
+            style="@style/TechCheckStyle"
+            android:text="EMA"
+            android:textColor="@color/selector_textcolor"
+            app:layout_constraintStart_toEndOf="@+id/ma_box"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/boll_box"
+            style="@style/TechCheckStyle"
+            android:text="BOLL"
+            android:textColor="@color/selector_textcolor"
+            app:layout_constraintStart_toEndOf="@+id/ema_box"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/sar_box"
+            style="@style/TechCheckStyle"
+            android:text="SAR"
+            android:textColor="@color/selector_textcolor"
+            app:layout_constraintStart_toEndOf="@+id/boll_box"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/group_divider"
+            android:layout_width="1dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:background="#cccccc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sar_box"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/group_divider"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:checked="true"
+                    android:text="VOL" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:layout_width="50dp"
+                    android:text="MAVOL" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="MACD" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="KDJ" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="DMA" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="RSI" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="ARBR" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="RSI" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="EMV" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="WR" />
+
+                <RadioButton
+                    style="@style/TechCheckStyle"
+                    android:text="CR" />
+            </RadioGroup>
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tech_type_view">
+
+        <RadioButton
+            android:id="@+id/float_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="悬浮窗" />
+
+        <RadioButton
+            android:id="@+id/top_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:checked="true"
+            android:text="顶部浮层" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
